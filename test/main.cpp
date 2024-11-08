@@ -23,7 +23,7 @@ static struct option opts[] = {
 int main(int argc, char **argv)
 {
 	struct device dev;
-	char dev_name[64] = "/dev/video0";
+	char dev_name[64] = "/dev/video12";
 
 	int do_set_format = 0;
 	int do_set_time_per_frame = 0;

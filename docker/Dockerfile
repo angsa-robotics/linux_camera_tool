@@ -1,8 +1,8 @@
 ## Dockerfile is a definition of how to build the image
 # it will take some time to build the image...
-FROM arm64v8/ubuntu:16.04
+FROM arm64v8/ubuntu:20.04
 #ENV OPENCV_VERSION 3.4.2
-
+ARG DEBIAN_FRONTEND=noninteractive
 #RUN apt-get update
 ## install all dependencies
 RUN apt-get update && apt-get install -y \
@@ -36,5 +36,7 @@ RUN mkdir ~/opencv_build && cd ~/opencv_build \
         -D WITH_GTK_2_X=OFF .. \
 && make -j6 && make install -j6 \
 && sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf' \
-&& ldconfig \
-&& git clone https://github.com/angsa-robotics/linux_camera_tool
+&& ldconfig
+
+# RUN cd ~/ && git clone https://github.com/angsa-robotics/linux_camera_tool && cd linux_camera_tool && mkdir build && cd build && \
+#         cmake -DUSE_OPENCV_CUDA=ON .. && make

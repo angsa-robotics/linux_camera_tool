@@ -88,7 +88,7 @@ char *enum_v4l2_device(char *dev_name)
         if (!dev)
         {
             printf("Unable to find parent usb device.");
-            exit(1);
+            continue;
         }
 
         /**
