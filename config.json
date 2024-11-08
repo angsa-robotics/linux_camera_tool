@@ -1,6 +1,5 @@
 {
-    "_comment":"this is the json config file used in \"Config File -> Load json\"\nput your camera info here to use the functionality of group write registers and capture image\nthis line is ignored",
-    "deviceName": "IMX477",
+    "deviceName": "LI-AR0231",
     "subAddress": "0x30",
     "regAddressWidth": 16,
     "regValueWidth":16,

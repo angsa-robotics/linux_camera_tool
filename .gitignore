@@ -12,7 +12,7 @@
 *.pch
 
 # Compiled Dynamic libraries
-#*.so
+*.so
 *.dylib
 *.dll
 
@@ -36,10 +36,3 @@
 
 *.bmp
 *.raw
-*.json
-*.txt
-*.bin
-*.img
-*.lif
-
-/doc/html/*

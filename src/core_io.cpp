@@ -1,24 +1,14 @@
+
 /*****************************************************************************
- * This file is part of the Linux Camera Tool 
- * Copyright (c) 2020 Leopard Imaging Inc.
- * 
- * This program is free software: you can redistribute it and/or modify  
- * it under the terms of the GNU General Public License as published by  
- * the Free Software Foundation, version 3.
- *
- * This program is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of 
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License 
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *                                                                            
- * This is the sample code for Leopard USB3.0 camera, this file is mainly    
- * for string and file manipulation.                                         
- *                                                                            
- * Author: Danyu L                                                           
- * Last edit: 2019/06                                                        
+  This sample is released as public domain.  It is distributed in the hope it
+  will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+  of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+  
+  This is the sample code for Leopard USB3.0 camera, this file is mainly for 
+  string and file manipulation.
+
+  Author: Danyu L
+  Last edit: 2019/06
 *****************************************************************************/
 #include "../includes/shortcuts.h"
 #include "../includes/core_io.h"
@@ -117,11 +107,7 @@ char *get_file_extension(char *filename)
     return extname;
 }
 
-/**
- * identify filename's file type
- */
-config_file_type 
-config_file_identifier(char *filename)
+int config_file_identifier(char *filename)
 {
     char *file_type = get_file_extension(filename);
     if (strcmp(file_type, "bin") == 0)
@@ -130,8 +116,7 @@ config_file_identifier(char *filename)
         return CONFIG_FILE_JSON;
     else if (strcmp(file_type, "txt") == 0)
         return CONFIG_FILE_TXT;
-    else 
-        return CONFIG_FILE_WRONG;
+    return CONFIG_FILE_BIN;
 }
 
 
@@ -140,7 +125,7 @@ void load_control_profile(int fd, char *filename)
     FILE *fp;
     long l_size;
     char *buffer;
-    config_file_type cfg_file = CONFIG_FILE_TXT;
+
     fp = fopen(filename, "rb");
 
     if (!fp)
@@ -168,12 +153,12 @@ void load_control_profile(int fd, char *filename)
         printf("read file failure\r\n");
         return;
     }
-    cfg_file = config_file_identifier(filename);
-    switch (cfg_file)
+
+    switch (config_file_identifier(filename))
     {
     case CONFIG_FILE_TXT:
         printf("*******************Commands Load From BatchCmd.txt***********\n");
-        txt_file_parser(fd, buffer, l_size);
+        txt_file_parser(fd, buffer, (int) l_size);
         printf("*******************Commands Executed From BatchCmd.txt*******\n");
         break;
     case CONFIG_FILE_JSON:
@@ -187,11 +172,6 @@ void load_control_profile(int fd, char *filename)
         //ap020x_program_flash_eeprom(fd, (unsigned char *)buffer, (int)l_size);
         printf("*******************Flash Finish From BIN file*****************\n");
         break;
-    case CONFIG_FILE_WRONG:
-    default: 
-        printf("*************Choose another type of file**********************\n");
-        break;
-   
     }
 
     fclose(fp);

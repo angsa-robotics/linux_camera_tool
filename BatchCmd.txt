@@ -1,5 +1,5 @@
 # Batch Command file for CameraTool
-# Copyright Leopard Imaging, Inc. 2019
+# Copyright Leopard Imaging, Inc. 2017
 # 
 # This file contains some commands, including I2C access, Delay, Capture.
 # A line starting with a # is a comment line
@@ -34,10 +34,9 @@ RegAddrWidth 16
 RegAddress 0x3060
 Write 0x0040
 Read 2
-RegAddress 0x3012
+RwgAddress 0x3012
 Write 0x00F0
 Read 2
 RegAddress 0x305e
 Write 0x300
 Read 2
-Capture 3
