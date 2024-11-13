@@ -1,7 +1,7 @@
 {
     "name": "Leopard Imaging Tool",
     "dockerComposeFile": "docker-compose.yml",
-    "service": "leopard",
+    "service": "leopard_imaging_tool",
     "workspaceFolder": "/root/linux_camera_tool",
     "privileged": true
 }
