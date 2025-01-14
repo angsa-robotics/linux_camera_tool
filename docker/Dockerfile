@@ -38,5 +38,6 @@ RUN mkdir ~/opencv_build && cd ~/opencv_build \
 && sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf' \
 && ldconfig
 
-# RUN cd ~/ && git clone https://github.com/angsa-robotics/linux_camera_tool && cd linux_camera_tool && mkdir build && cd build && \
-#         cmake -DUSE_OPENCV_CUDA=ON .. && make
+WORKDIR /root/
+RUN git clone https://github.com/angsa-robotics/linux_camera_tool
+RUN cd linux_camera_tool && mkdir build && cd build && cmake -DUSE_OPENCV_CUDA=ON .. && make && chmod +x leopard_cam
